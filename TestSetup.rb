@@ -1,18 +1,20 @@
 require "selenium-webdriver"
 require "test/unit"
- 
+require "rspec/expectations"
+
 class SiteSetup < Test::Unit::TestCase
 
-  def initialize(url)
+def initialize
     Selenium::WebDriver::Chrome.driver_path = File.join(File.absolute_path('', File.dirname("C://Projects/chromedriver")),"chromedriver","chromedriver.exe")
     @driver = Selenium::WebDriver.for :chrome
     @driver.navigate.to('http://pizzalviv.com/')
-    @driver.manage.window.maximize    
-  end
+    @driver.manage.window.maximize  
+    @driver.manage.timeouts.implicit_wait = 1  
+end
   
    
   def close_popup
-   return @driver.find_element(:class_name, "close_popup")
+   return @driver.find_element(:class_name, "close_popup").click
   end
   
   def locate_pizza()
@@ -37,7 +39,9 @@ class SiteSetup < Test::Unit::TestCase
   end
 
   def verifyammount()
-     assert(@driver.find_element(:class_name, "price").text.include?("83"),"Assertion Failed")
+    element_value = @driver.find_element(:class_name, "price").text
+    element_value.should =~ /(83)/
+    puts 'Ammount is correct'
   end
     
    def checkout_link()
