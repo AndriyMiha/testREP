@@ -12,6 +12,7 @@ class TestCase_1
     Pizza_Page.validate_show_per_page_15
     Pizza_Page.select_small_margarita
     Pizza_Page.gotobasket
+    Basket = homepage
     Basket.verifyammount
     Basket.checkout_link
     Basket.empty_fields_validation
