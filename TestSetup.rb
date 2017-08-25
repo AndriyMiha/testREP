@@ -47,12 +47,15 @@ end
     
    def checkout_link()
     @driver.find_element(:xpath, "html/body/div[1]/section/div[2]/div[1]/a[2]").click
-    sleep 0.2
-    @driver.find_element(:xpath, "html/body/div[1]/section/div[2]/div[2]/form/div[7]/a").click
+   end
+  
+  def click_submit()
+    @driver.manage.timeouts.implicit_wait = 0.2 
+    @driver.find_element(:css, ".button.inl.vmid.makeOrder").click
   end
   
   def verify_error
-    @driver.save_screenshot("C://Projects/TestPlay")
+    @driver.save_screenshot("C://Projects/TestPlay/test.png")
   end
   
   def close_browser
