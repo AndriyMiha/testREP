@@ -6,7 +6,7 @@ class SiteSetup < Test::Unit::TestCase
   def initialize(url)
     Selenium::WebDriver::Chrome.driver_path = File.join(File.absolute_path('', File.dirname("C://Projects/chromedriver")),"chromedriver","chromedriver.exe")
     @driver = Selenium::WebDriver.for :chrome
-    @driver.navigate.to url
+    @driver.navigate.to('http://pizzalviv.com/')
     @driver.manage.window.maximize    
   end
   
