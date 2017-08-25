@@ -2,6 +2,7 @@ require "selenium-webdriver"
 require "test/unit"
 require "rspec/expectations"
 
+
 class SiteSetup < Test::Unit::TestCase
 
 def initialize
@@ -9,16 +10,16 @@ def initialize
     @driver = Selenium::WebDriver.for :chrome
     @driver.navigate.to('http://pizzalviv.com/')
     @driver.manage.window.maximize  
-    @driver.manage.timeouts.implicit_wait = 1  
 end
   
    
   def close_popup
+    @driver.manage.timeouts.implicit_wait = 1  
    return @driver.find_element(:class_name, "close_popup").click
   end
   
   def locate_pizza()
-    return @driver.find_element(:xpath, "html/body/div[1]/header/div/div[5]/div/nav/ul/li[1]/a")
+    return @driver.find_element(:xpath, "html/body/div[1]/header/div/div[5]/div/nav/ul/li[1]/a").click
   end
   
   def popup()
@@ -27,7 +28,7 @@ end
   end
     
   def select_pizza()
-    return @driver.find_element(:xpath, "html/body/div[1]/section/div[3]/div[4]/div[3]/div[2]/div/a[1]")
+    return @driver.find_element(:xpath, "html/body/div[1]/section/div[3]/div[4]/div[3]/div[2]/div/a[1]").click
   end
   
   def field_input()
@@ -35,7 +36,7 @@ end
   end
   
   def gotobasket()
-    return @driver.find_element(:xpath, "html/body/div[1]/header/div/div[1]/p/a")
+    return @driver.find_element(:xpath, "html/body/div[1]/header/div/div[1]/p/a").click
   end
 
   def verifyammount()
@@ -47,11 +48,11 @@ end
    def checkout_link()
     @driver.find_element(:xpath, "html/body/div[1]/section/div[2]/div[1]/a[2]").click
     sleep 0.2
-    @driver.find_element(:html, "/body/div[1]/section/div[2]/div[2]/form/div[7]/a").click
+    @driver.find_element(:xpath, "html/body/div[1]/section/div[2]/div[2]/form/div[7]/a").click
   end
   
   def verify_error
-    @driver.save_screenshot("C://Projects/chromedriver")
+    @driver.save_screenshot("C://Projects/TestPlay")
   end
   
   def close_browser
