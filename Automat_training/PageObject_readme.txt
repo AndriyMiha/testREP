@@ -1,0 +1,26 @@
+We keep our setup, teardown, and run actions mostly the same. But we change the base_url from an instance variable to an environment variable. Doing this will enable us to access it from anywhere in our test suite.
+
+While the usage of environment variables can be a slippery slope, this is an ideal candidate for it since it effects the overall behavior of the suite.
+
+Next we create a Page Object for Google Search by using a standard Ruby class and add some relevant bits to it.
+
+At the top of it we pull out the CSS locators used in our test steps and put them into helpfully named constants to use instead. And instead of using the two part 'how', 'what' approach, we are using a hash to store the locator type and its value.
+
+Next we use attr_reader to create a place to store the Selenium WebDriver instance for use throughout the class.
+
+The class expects an argument (e.g. the Selenium WebDriver instance) which is received through the initialize method. Inside the initialize method we take care of passing the Selenium object into the attr_reader object along with visiting the page and verifying that we are in the correct place. All of these things will execute in order when this class is instantiated.
+
+We then break out each of the test steps into methods that execute the behavior specific to the page while also swapping out the hard-coded CSS locators for our new CSS locator constant variables.
+
+At the bottom of the class we have private helper methods. These methods aren't necessarily specific to the page this class represents, but they are useful for it to function. So we want to access them within the class, but make it so they're not available outside of the class. Using the private classification gets us this behavior nicely.
+
+And lastly, we update the displayed? private method to take a single argument for a 'locator' object (e.g. one of our CSS locator constant variables).
+
+It's worth noting that while we are peforming an assertion in the Page Object in our verify_page action assertions should only be performed in your test scripts (just like the run action above). Using a verify_page action is just a helpful exception to the rule.
+
+Expected Behavior
+Load Google
+Search for your query
+Wait for the first search result to render
+Grab the text from it
+Assert that the text we want is within it
