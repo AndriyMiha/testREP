@@ -1,4 +1,4 @@
-
+#now
   text = "I am learning Ruby and its fun!"
   text.downcase!
   freqs = {}
